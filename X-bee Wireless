@@ -1,0 +1,56 @@
+a.pinMode(15,'input'); % z axis
+a.pinMode(16,'input'); % y axis
+a.pinMode(17,'input'); % x axis
+a.pinMode(18,'output');
+a.pinMode(19,'output');
+
+
+a.digitalWrite(18,0);
+a.digitalWrite(19,1);
+
+xval = zeros();
+yval = zeros();
+zval = zeros();
+
+
+xval(1) = a.analogRead(1);
+yval(1) = a.analogRead(1);
+zval(1) = a.analogRead(1);
+
+
+
+pause(0.001);
+
+for i = 2:1000
+    
+    xval(i) = a.analogRead(3);
+    yval(i) = a.analogRead(2); 
+    zval(i) = a.analogRead(1);
+    
+    
+    xmod = (xval-496)/300;
+    ymod = (yval-511)/300;
+    zmod = (zval-508)/300;
+    
+    subplot( 3,1,1)
+    grid on;
+    plot(xmod, 'r');
+    axis([1 1000 -0.25 0.25]);
+    title( 'x-direction of acceleration' );
+    
+    subplot( 3,1,2)
+    grid on;
+    plot(ymod, 'r');
+    axis([1 1000 -0.25 0.25]);
+    title( 'y-direction of acceleration' );
+    
+    subplot( 3,1,3)
+    grid on;
+    plot(zmod, 'r');
+    axis([1 1000 -0.5 0.5]);
+    title( 'z-direction of acceleration' );
+    
+    
+    pause(0.001);
+    
+end
